@@ -45,7 +45,22 @@ def analyze_website_link_structure(base_url, max_recursion_depth=1):
         except requests.exceptions.RequestException as e:
             print(f"Error fetching URL: {url} ({e})")
 
+            # Write collected URLs to files
+        with open("processed_urls.txt", "w") as f:
+            for url in processed_urls:
+                f.write(url + "\n")
 
+        with open("internal_links.txt", "w") as f:
+            for url in internal_links:
+                f.write(url + "\n")
+
+        with open("external_links.txt", "w") as f:
+            for url in external_links:
+                f.write(url + "\n")
+
+        with open("unique_external_domains.txt", "w") as f:
+            for domain in unique_external_domains:
+                f.write(domain + "\n")
 
     explore_page(base_url, 1)
 
